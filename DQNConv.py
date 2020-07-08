@@ -87,12 +87,12 @@ if __name__ == '__main__':
     dqn = DQNConv(nb_actions=9, nb_vel=15)
     image_size = (1,2,16,160)
     inputVar = torch.rand(image_size)
-    print inputVar.size()
+    print(inputVar.size())
     inputVar2 = torch.rand((1,15))
-    print inputVar2.size()
+    print(inputVar2.size())
     outputVar = dqn(inputVar, inputVar2)
-    print outputVar.size()
-    print outputVar.max(), outputVar
+    print(outputVar.size())
+    print('{} {}'.format(outputVar.max(), outputVar))
     x, disps = dqn.forward_disp(inputVar, inputVar2)
 
     # test omniDir
@@ -100,11 +100,11 @@ if __name__ == '__main__':
     image_size = (1,2,16,160)
     inputVar = (torch.rand(image_size), torch.rand(image_size), torch.rand(image_size), torch.rand(image_size))
     inputVar2 = torch.rand((1,15))
-    print inputVar2.size()
+    print(inputVar2.size())
     outputVar = dqn(inputVar, inputVar2)
-    print outputVar.size()
-    print outputVar.max(), outputVar
+    print(outputVar.size())
+    print('{} {}'.format(outputVar.max(), outputVar))
     x, disps = dqn.forward_disp(inputVar, inputVar2)
     
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 

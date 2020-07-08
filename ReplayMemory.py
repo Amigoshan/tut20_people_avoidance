@@ -128,7 +128,7 @@ class ReplayMemory(object):
         if self._extra_state_shape is not None:
             self._extra_states = np.load(join(self._savedir,prefix+'extra_states.npy'))
 
-        print 'load memory from..', self._states.shape, self._extra_states.shape
+        print('load memory from.. {} {}'.format(self._states.shape, self._extra_states.shape))
 
     def minibatch(self, size):
         """ Generate a minibatch with the number of samples specified by the size parameter.

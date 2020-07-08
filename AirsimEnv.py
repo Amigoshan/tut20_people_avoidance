@@ -182,7 +182,7 @@ class PeopleAvoidEnvBase(AirsimEnvBase):
         # print 'reward %.5f (forward %.5f, deviation %.5f, collision %.1f, action %.5f)' % (reward, reward_forward, reward_deviation, reward_collision, reward_action)
         # print 
         if reward<-1000:
-            print 'REWARD ERROR:',reward, reward_forward, reward_deviation, reward_collision, reward_action
+            print('REWARD ERROR: {}, {}, {}, {}, {}'.format(reward, reward_forward, reward_deviation, reward_collision, reward_action))
             # import ipdb;ipdb.set_trace()
         return reward, collision_info.has_collided
 
@@ -197,7 +197,7 @@ class PeopleAvoidEnvBase(AirsimEnvBase):
 
         rgblist, depthlist, seglist = self.readimgs()
         if rgblist is None: # How to deal with the environmental error?
-            print 'AirsimEnv: Observation error!!'
+            print('AirsimEnv: Observation error!!')
             return None
         self.depthimg, self.segimg = depthlist[0], seglist[0]
         self.segimg[self.segimg==self.peopleIdx] = 1
@@ -268,7 +268,7 @@ class PeopleAvoidEnvBase(AirsimEnvBase):
         #     self.printControl = True
         if finish:
             episodeTime = time.time()-self.episodeStartTime
-            print 'Timeelapse:',episodeTime,'average period:',episodeTime/self.stepCount, 'speedup:',self.stepCount/episodeTime/10.
+            print('Timeelapse:{}, average period: {}, speedup: {}'.format(episodeTime, episodeTime/self.stepCount, self.stepCount/episodeTime/10.) ) 
         return state, reward, finish, None
 
     def reset(self):
@@ -369,7 +369,7 @@ class PeopleAvoidDiscreteOneDirEnv(PeopleAvoidEnvBase):
         elif action == 8:
             vx, vy = self.maxVel*0.8, -self.maxVel*0.8  
         else:
-            print 'Invalid action:', action
+            print('Invalid action:'.format(action))
             return 0., 0., 0.
 
 
@@ -427,7 +427,7 @@ class PeopleAvoidDiscreteEnv(PeopleAvoidDiscreteOneDirEnv):
 
         rgblist, depthlist, seglist = self.readimgs()
         if rgblist is None: # How to deal with the environmental error?
-            print 'AirsimEnv: Observation error!!'
+            print('AirsimEnv: Observation error!!')
             return None
 
         imglist = []
@@ -464,7 +464,7 @@ class PeopleAvoidDiscreteEnv(PeopleAvoidDiscreteOneDirEnv):
     def render(self, state):
         imgstate = state['img']
         imgshape = imgstate.shape
-        print imgshape
+        print(imgshape)
 
         depth_show = np.zeros((imgshape[2], imgshape[3]*4),dtype=np.uint8)
         for k in range(imgshape[0]):
@@ -542,7 +542,7 @@ class PeopleAvoidEnv(PeopleAvoidEnvBase):
 
         action_cost = action_cost * self.lambda_action
         if action_cost <-1:
-            print 'action cost error!',action, action_cost
+            print('action cost error! {}, {}'.format(action, action_cost))
             action_cost = -1
         return action_cost
 
@@ -613,7 +613,7 @@ if __name__ == '__main__':
     env.reset()
     for k in range(200):
         state, reward, finish, _ = env.step(1)#np.random.randint(9))
-        print reward, state['vel']
+        print('reward {}, vel {}'.format(reward, state['vel']))
         env.render(state)
         #time.sleep(0.1)
         if finish:

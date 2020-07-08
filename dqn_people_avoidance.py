@@ -2,6 +2,7 @@ import cv2
 import torch
 import torch.optim as optim
 import numpy as np
+np.set_printoptions(precision=2, suppress=True)
 
 from AirsimEnv import PeopleAvoidDiscreteEnv, PeopleAvoidDiscreteOneDirEnv
 # from DQNConv import DQNConv
@@ -303,8 +304,8 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
 
         if self.countTrain % self.args.target_update_interval == 0:
             self.targetdqn.load_state_dict(self.dqn.state_dict())
-            print '===> Update target_net...'
-            print
+            print('===> Update target_net...')
+            print('')
 
 
     def test(self, ):
@@ -318,10 +319,10 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
         self.memory.append(self.current_state[0][0], action, reward, finish, self.current_state[1][0])
         self.visualizeAction(action)
 
-        print
-        print self.countTest, 'action', action
+        print('')
+        print('{}, action {}'.format(self.countTest, action))
         if finish:
-            print 'reward for this episode:', sum(self.episode_reward)
+            print('reward for this episode: {}'.format(sum(self.episode_reward)))
             self.episode_reward = []
 
             self.current_state = self.env.reset()
@@ -353,7 +354,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
         elif action==8:
             endpt = (centerpt[0]-linelen, centerpt[1]-linelen)
         else:
-            print 'action error..'
+            print('action error..')
         return endpt
 
     def visualizeAction(self, action):
@@ -412,7 +413,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
         for k,q in enumerate(qvis):
             endpt = self.action2coord(k,startpt,linelen=int(imgsize*q))
             cv2.arrowedLine(qimg,startpt,endpt,color=(0,0,1),thickness=2)
-        print qvalues
+        print('Q values: {}'.format(qvalues))
         # cv2.imshow('qvalue',qimg)
         # cv2.waitKey(1)
         return qimg
@@ -470,10 +471,10 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
         self.visualizeAction(action)
         self.vis_network(state, qvalue, disps)
 
-        print
-        print self.countTest, 'action', action
+        print('')
+        print('{}, action {}'.format(self.countTest, action))
         if finish:
-            print 'reward for this episode:', sum(self.episode_reward)
+            print('reward for this episode: {}'.format(sum(self.episode_reward)))
             self.episode_reward = []
 
             self.current_state = self.env.reset()
