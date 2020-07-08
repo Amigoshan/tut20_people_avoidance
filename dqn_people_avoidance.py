@@ -359,7 +359,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
 
     def visualizeAction(self, action):
         imgsize = 50
-        startpt = (imgsize/2,imgsize/2)
+        startpt = (int(imgsize/2),int(imgsize/2))
         endpt = self.action2coord(action,startpt)
 
         img=np.ones((imgsize,imgsize)).astype(np.uint8)*255
