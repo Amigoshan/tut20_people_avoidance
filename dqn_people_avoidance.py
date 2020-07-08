@@ -379,7 +379,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
                 if len(disp_norm.shape)==2:
                     disp_norm = np.expand_dims(disp_norm,axis=1)
                 # add gray strip
-                disp_norm = np.concatenate((disp_norm,np.ones_like(disp_norm)[:,0:4/scale+1,:]*0.9),axis=1)
+                disp_norm = np.concatenate((disp_norm,np.ones_like(disp_norm)[:,0:int(4/scale+1),:]*0.9),axis=1)
                 disp_norm = disp_norm.reshape(-1,disp_norm.shape[-1])
                 disp_norm = cv2.resize(disp_norm, (0,0), fx=scale, fy=scale, interpolation=3)
             # imshow
