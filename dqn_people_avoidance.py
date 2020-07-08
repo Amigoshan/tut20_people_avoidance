@@ -432,7 +432,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
             imgw += (imggap + imgshape[1])
         imgh += imggap
         alignimg = np.ones((imgh,imgw,3),dtype=np.float32) * 0.9
-        startx, starty = 0, imggap/2
+        startx, starty = 0, int(imggap/2)
         for imgshape,img in zip(shapelist,imglist):
             startx = imgh/2-imgshape[0]/2 # align middle 
             if len(imgshape)==2:
