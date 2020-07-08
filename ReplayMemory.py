@@ -1,6 +1,6 @@
 import numpy as np
 from os.path import join
-import cPickle as pkl
+import pickle as pkl
 
 class ReplayMemory(object):
     """
