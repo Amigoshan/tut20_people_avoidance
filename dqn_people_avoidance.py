@@ -405,7 +405,7 @@ class TrainDQNPeopleAvoidance(TorchFlow.TorchFlow):
 
     def qvalue2img(self, qvalues):
         imgsize = 200
-        startpt = (imgsize/2,imgsize/2)
+        startpt = (int(imgsize/2),int(imgsize/2))
         qimg=np.ones((imgsize,imgsize)).astype(np.float32) * 0.9
         qvis = (qvalues-qvalues.mean())/qvalues.std()
         qvis = np.exp(qvis)*2
