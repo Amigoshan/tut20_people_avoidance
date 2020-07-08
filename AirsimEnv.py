@@ -48,7 +48,7 @@ class AirsimEnvBase(object):
                 # response_nsec = response.time_stamp
                 # response_time = rospy.rostime.Time(int(response_nsec/1000000000),response_nsec%1000000000)
                 if response.height == 0 or response.width == 0:
-                    print 'Something wrong with image return..', idx
+                    print('Something wrong with image return.. {}'.format( idx))
                     return None, None, None
                 if imgtype == 'DepthPlanner': #response.pixels_as_float:  # for depth data
                     img1d = np.array(response.image_data_float, dtype=np.float32)
